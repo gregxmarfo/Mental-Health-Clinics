@@ -1,0 +1,35 @@
+---
+title: "Exploratory Data Analysis of Mental Health Clinics in US"
+author: "Gregory Asamoah"
+date: "November 5, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Exploring healthcare facility
+data recorded by the U.S. Government for VA hospitals in the
+mainland of the United States.
+```{r}
+library(rvest)
+library(ggplot2)
+library(dplyr)
+Health <- read_html("https://datafiles.samhsa.gov/study-dataset/national-mental-health-services-survey-2015-n-mhss-2015-ds0001-nid17098")
+
+Health
+Health %>% html_node("summary_text") %>% html_text()
+```
+
+
+
+
+## Including Plots
+
+##You can also embed plots, for example:
+
+```{r , echo=TRUE}
+
+```
+
+Note that the `echo = TRUE` parameter was added to the code chunk to enable printing of the R code that generated the plot.
