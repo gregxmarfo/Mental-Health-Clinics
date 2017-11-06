@@ -15,10 +15,16 @@ mainland of the United States.
 library(rvest)
 library(ggplot2)
 library(dplyr)
+library(purrr)
 Health <- read_html("https://datafiles.samhsa.gov/study-dataset/national-mental-health-services-survey-2015-n-mhss-2015-ds0001-nid17098")
+
+html_nodes(Health, "a") %>% 
+  map(xml_attrs) %>% 
+  map_df(~as.list(.))
 
 Health
 Health %>% html_node("summary_text") %>% html_text()
+html_nodes(Health, "table")
 ```
 
 

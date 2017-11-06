@@ -136,15 +136,41 @@ library(dplyr)</code></pre>
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(purrr)</code></pre>
+<pre><code>## 
+## Attaching package: 'purrr'</code></pre>
+<pre><code>## The following object is masked from 'package:rvest':
+## 
+##     pluck</code></pre>
 <pre class="r"><code>Health &lt;- read_html(&quot;https://datafiles.samhsa.gov/study-dataset/national-mental-health-services-survey-2015-n-mhss-2015-ds0001-nid17098&quot;)
 
-Health</code></pre>
+html_nodes(Health, &quot;a&quot;) %&gt;% 
+  map(xml_attrs) %&gt;% 
+  map_df(~as.list(.))</code></pre>
+<pre><code>## # A tibble: 83 x 5
+##                                href                               class
+##                               &lt;chr&gt;                               &lt;chr&gt;
+##  1                    #main-content element-invisible element-focusable
+##  2                                /                 site-branding__logo
+##  3                                #                  mobile-nav-toggler
+##  4                                /                                &lt;NA&gt;
+##  5 /info/about-samhda-project-nid14                                &lt;NA&gt;
+##  6 /info/about-samhda-project-nid14                                &lt;NA&gt;
+##  7           /info/contact-us-nid17                                &lt;NA&gt;
+##  8            /info/subscribe-nid66                                &lt;NA&gt;
+##  9                 /info/faqs-nid46                                &lt;NA&gt;
+## 10     /info/external-links-nid3420                                &lt;NA&gt;
+## # ... with 73 more rows, and 3 more variables: title &lt;chr&gt;, rel &lt;chr&gt;,
+## #   target &lt;chr&gt;</code></pre>
+<pre class="r"><code>Health</code></pre>
 <pre><code>## {xml_document}
 ## &lt;html class=&quot;no-js&quot; lang=&quot;en&quot; dir=&quot;ltr&quot; prefix=&quot;: content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ og: http://ogp.me/ns# rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema#&quot;&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
 ## [2] &lt;body class=&quot;html not-front not-logged-in page-node page-node- page- ...</code></pre>
 <pre class="r"><code>Health %&gt;% html_node(&quot;summary_text&quot;) %&gt;% html_text()</code></pre>
 <pre><code>## [1] NA</code></pre>
+<pre class="r"><code>html_nodes(Health, &quot;table&quot;)</code></pre>
+<pre><code>## {xml_nodeset (0)}</code></pre>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>
 </div>
